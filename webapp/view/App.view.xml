@@ -1,14 +1,13 @@
 <mvc:View controllerName="supplier.SupplierApp.controller.App" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m" xmlns:f="sap.f">
 	<Shell id="shell">
 		<App id="app">
-			<f:FlexibleColumnLayout id="flexibleColumnLayout" backgroundDesign="Translucent" layout="OneColumn" stateChange="onStateChanged">
-				<f:beginColumnPages>
+			<f:FlexibleColumnLayout id="flexibleColumnLayout" backgroundDesign="Solid" layout="{lay>/layout}" stateChange="onStateChanged"/>
+			<!--	<f:beginColumnPages>
 					<mvc:XMLView id="beginView" viewName="supplier.SupplierApp.view.Supplier"/>
 				</f:beginColumnPages>
 				<f:midColumnPages>
 					<mvc:XMLView id="detailView" viewName="supplier.SupplierApp.view.SupplierDetail"/>
-				</f:midColumnPages>
-			</f:FlexibleColumnLayout>
+				</f:midColumnPages>-->
 		</App>
 	</Shell>
 </mvc:View>

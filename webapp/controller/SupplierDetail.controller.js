@@ -11,7 +11,23 @@ sap.ui.define([
 		 * @memberOf supplier.SupplierApp.view.SupplierDetail
 		 */
 		onInit: function () {
+			var oOwnerComponent = this.getOwnerComponent();
+			this.oRouter = oOwnerComponent.getRouter();
+			this.oModel = oOwnerComponent.getModel();
+			this.oRouter.getRoute("master").attachPatternMatched(this._onSupplierMatched, this);
+			this.oRouter.getRoute("detail").attachPatternMatched(this._onSupplierMatched, this);
 
+		},
+
+		_onSupplierMatched: function (oEvent) {
+			this._supplier = oEvent.getParameter("arguments").supplier || this._supplier || "0";
+			this.byId("productsTable").bindItems({
+				path: "/" + this._supplier + "/Products",
+				template: this.byId("productsTable").getBindingInfo("items").template
+			});
+			this.getView().bindElement({
+				path: "/" + this._supplier
+			})
 		},
 
 		onEditToggleButtonPress: function () {
@@ -19,7 +35,7 @@ sap.ui.define([
 				bCurrentShowFooterState = oObjectPage.getShowFooter();
 
 			oObjectPage.setShowFooter(!bCurrentShowFooterState);
-		}
+		},
 
 		/**
 		 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
@@ -43,9 +59,11 @@ sap.ui.define([
 		 * Called when the Controller is destroyed. Use this one to free resources and finalize activities.
 		 * @memberOf supplier.SupplierApp.view.SupplierDetail
 		 */
-		//	onExit: function() {
-		//
-		//	}
+		onExit: function () {
+			this.oRouter.getRoute("master").detachPatternMatched(this._onSupplierMatched, this);
+			this.oRouter.getRoute("detail").detachPatternMatched(this._onSupplierMatched, this);
+
+		}
 
 	});
 

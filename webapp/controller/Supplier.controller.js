@@ -12,12 +12,20 @@ sap.ui.define([
 		 * @memberOf supplier.SupplierApp.view.Supplier
 		 */
 		onInit: function () {
+			this.oView = this.getView();
+			this.oRouter = this.getOwnerComponent().getRouter();
 
 		},
-		onSelectionChange: function () {
-				var oFCL = this.oView.getParent().getParent();
+		onSelectionChange: function (oEvent) {
+				// var oFCL = this.oView.getParent().getParent();
+				// oFCL.setLayout(fioriLibrary.LayoutType.TwoColumnsMidExpanded);
+				var supplierPath = oEvent.getParameter("listItem").getBindingContext().getPath();
+				var supplier = supplierPath.split("/").slice(-1).pop();
+				this.oRouter.navTo("detail", {
+					layout: fioriLibrary.LayoutType.TwoColumnsMidExpanded,
+					supplier: supplier
+				});
 
-				oFCL.setLayout(fioriLibrary.LayoutType.TwoColumnsMidExpanded);
 			}
 			/**
 			 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
