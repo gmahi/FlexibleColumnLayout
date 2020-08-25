@@ -15,7 +15,7 @@
 		},
 		"dataSources": {
 			"Odata.svc": {
-				"uri": "/northwind/V2/Odata/Odata.svc/",
+				"uri": "/northwind/V2/(S(r55krl3smmwywaeh5rxwq13c))/OData/OData.svc/",
 				"type": "OData",
 				"settings": {
 					"localUri": "localService/metadata.xml"
